@@ -1,0 +1,115 @@
+{% extends "userhome.html" %}
+{% load static %}
+{% block content %}
+<style>
+    #pass{
+        margin-left: 16px;
+    }
+    .head{
+        background-color: rgb(220 218 218);
+        width: 640px;
+        padding: 9px;
+        margin-left: -17px;
+    }
+    .title{
+        margin-left: 22px;
+        margin-top: -8px;
+    }
+    .content{
+        width: 641px;
+        /* padding: 150px; */
+        margin-left: 100px;
+        margin-top: 3px;
+        height: 390px;
+    }
+    #form{
+        margin-left: 190px;
+    }
+   .input{
+       margin-top: -104px;
+   }
+   #old{
+       margin-left: -80px;
+       font-size: 22px;
+       width: auto;
+       margin-top: 95px;
+   }
+   .old{
+       margin-left: 140px;
+       margin-top: -28px;
+   }
+   input{
+       border-radius: 7px;
+       width: 222px;
+       margin-top: -1px;
+   }
+   #new{
+       margin-left: -93px;
+       font-size: 22px;
+       width: auto;
+       margin-top: 28px;
+   }
+   .new{
+       margin-left: 139px;
+       margin-top: -26px;
+   }
+   .button{
+    margin-top: 40px;
+    margin-left: 256px;
+   }
+   #button{
+       background-color: #eeb7ae;
+       margin-left: -220px;
+   }
+   #close{
+    background-color: #f03535;
+    width: 60px;
+   }
+   .close{
+    margin-left: 542px;
+    margin-top: -125px;
+   }
+   .enter{
+       font-size: 22px;
+       width : fit-content;
+       margin-left: -92px;
+       margin-top: 28px;
+    }
+    #enter{
+        margin-left: 139px;
+        margin-top: -27px;
+    }
+</style>
+<main class="content" id="cont">
+    <form method="post" action="{% url 'change' %}" onsubmit="return validateform(this);" id="form">
+        {% csrf_token %}
+        <div class="head">
+            <div id="pass">
+            <h2>Change your password</h2>
+            </div>
+            <div class="title">
+                <h6>Create a new secure password</h6>
+            </div>
+        </div>
+        <div class="content">
+            <div class="input">
+              <div id="old">Old-password&emsp;:</div>
+              <div class="old"><input type="text" name="oldpsw"></div>
+            </div>
+            <div id="new">New-password&emsp;:</div>
+            <div class="new"><input type="password" name="newpsw"></div>
+            <div class="enter"> Re-enter<br>new-password&emsp;:</div>
+            <div id="enter"><input type="password" name="vpsw"></div>
+            <div class="button">
+                <button type="submit" id="button">Change</button>
+            </div>
+        </div>
+    </form>
+    <form method="post" action="{% url 'userhome' %}">
+        {% csrf_token %}
+    <div class="close">
+        <button id="close">Close</button>
+    </div></form>
+      </div>
+    </main>
+    {% endblock %}

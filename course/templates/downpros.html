@@ -1,0 +1,64 @@
+{% extends "userhome.html" %}
+{% load static %}
+{% block content %}
+<style>
+    #search{
+        background-color: #98d0cb;;
+    }
+    #body{
+        background-color: azure;
+        margin-top: -40px;
+    }
+    #box{
+        margin-top: 55px;
+        margin-left: 102px;
+    }
+    #list{
+        margin-left: 10px;
+    }
+    .col{
+        margin-left: 520px;
+    font-size: 24px;
+    margin-top: 20px;
+    }
+    #table{
+        margin-top: -40px;
+    }
+</style>
+<div class="col"><b>Prospectus list</b></div>
+<main class="content">
+<section id="main-content" style="min-height: 93vh">
+    <section class="wrapper" id="body">
+            <div class="row mt" id="box">
+                <div class="col-lg-10" id="table">
+                <div class="content-panel" style="padding: 10px 10px;">
+                    <section id="unseen"> 
+                      <table class="table table-bordered table-striped table-condensed" style="width:330%;">
+                        <thead>
+                        <tr>
+                          <th>Sl:No</th>
+                          <th>Prospectus</th>
+                          <th>Download</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                              {% for d in data %}
+                          <tr>
+                              <td>{{forloop.counter}}</td>
+                              <td>{{d.name}}</td>
+                              <td><a class="btn btn-link"  href="../media/{{d.prospectus}}" download>Download</a>
+                              </td>
+                        </tr>
+                        {% endfor %}								
+                      </tbody>
+                    </table>
+                    </section>
+            </div><!-- /content-panel -->
+         </div><!-- /col-lg-4 -->	
+        <div style="height:480px;">
+          </div>				   
+        </div><!-- /row -->
+      </section>
+  </section>
+  </main>
+  {% endblock %}

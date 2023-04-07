@@ -1,0 +1,219 @@
+{% extends "userhome.html" %}
+{% load static %}
+{% block content %}
+<style>
+  .body{
+    margin-left: 195px;
+  }
+  .student-profile .card {
+    border-radius: 10px;
+}
+.student-profile .card .card-header .profile_img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 10px auto;
+    border: 10px solid #ccc;
+    border-radius: 50%;
+}
+.student-profile .card h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+.student-profile .card p {
+    font-size: 16px;
+    color: #000;
+}
+.student-profile .table th,
+.student-profile .table td {
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #000;
+}
+#shadow{
+  margin-top: -234px;
+    margin-left: -10px;
+    width: 520px;
+    height: 300px;
+}
+#card{
+  margin-left: 180px;
+  margin-top: 75px;
+}
+#table{
+  width:100px;
+}
+#show{
+  margin-top: 250px;;
+}
+tbody{
+  margin-left: -10px;
+}
+.name{
+  margin-left: 45px;
+  margin-top: 35px;
+}
+.sem{
+  margin-left: 178px;
+  margin-top: -29px;
+}
+.abhi{
+  margin-left: 232px;
+  margin-top: -30px;
+}
+.whole{
+  margin-left: -9px;
+  margin-top: -8px;
+}
+b{
+  font-size: 20px;
+}
+.whol{
+  margin-left: -12px;
+  margin-top: -22px
+}
+.semi{
+  margin-left: 175px;
+  margin-top: -29px;
+}
+.button{
+  margin-left: 200px;
+    margin-top: -15px;
+}
+#but{
+  background-color: #f5b968;
+}
+#tog{
+  margin-left: 581px;
+    margin-top: -340px;
+}
+#s{
+  width: 170px;
+    height: 35px;
+}
+#addr{
+  margin-top: -40px;
+}
+#phone{
+  margin-top: 5px;
+}
+#qual{
+  margin-top: -50px;
+}
+#bun{
+  margin-top: -100px;
+    margin-left: 44px;
+}
+</style>
+{% for d in datapf %}
+<div class="body">
+<div class="student-profile py-4">
+  <div class="container">
+    <div class="row">
+   
+   
+      <div class="col-lg-8" id="show">
+        <div class="card shadow-sm" id="shadow">
+         <div class="card-body pt-0">
+           <div class="whole">
+           <div class="name"><b>Name</b></div>
+           <div class="semi"><b>:</b></div>
+           <div class="abhi"><b>{{d.username}}</b></div>
+           </div>
+           <div class="whol">
+            <div class="name"><b>Phone no</b></div>
+            <div class="sem"><b>:</b></div>
+            <div class="abhi"><b>{{d.phoneno}}</b></div>
+            </div>
+            <div class="whol">
+              <div class="name"><b>Address</b></div>
+              <div class="sem"><b>:</b></div>
+              <div class="abhi"><b>{{d.address}}</b></div>
+              </div>
+                  <div class="whol">
+                    <div class="name"><b>qualification</b></div>
+                    <div class="sem"><b>:</b></div>
+                    <div class="abhi"><b>{{d.qualification}}</b></div>
+                    </div>
+                  
+          </div>
+        </div>
+      </div>
+      <div class="button">
+        <a type="button" id="but" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit-{{d.userid}}">Edit profile</a>
+      </div>
+
+      <div class="modal fade" id="edit-{{d.userid}}" role="dialog">
+        <div class="modal-dialog modal-lg" id="tog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title custom_align" id="Heading">Edit profile</h4>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" method="post" name="myForm" onsubmit=""
+                action="{% url 'editprofile' %}">
+                {% csrf_token %}
+                <input type="hidden" class="form-control" value="{{d.userid}}" name="userid">
+                <div class="box-content">
+                  <div class="col-md-10 col-md-offset-2">
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label no-padding-right" for="form-field-1">Name</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="username" value="{{d.username}}" id="s" class="col-xs-10 col-sm-5" />
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                  <br><br>
+                  <div class="col-md-10 col-md-offset-2">
+                    <div class="form-group" id="addr">
+                      <label class="col-sm-2 control-label no-padding-right"
+                        for="form-field-1">Address</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="address" value="{{d.address}}" id="s"
+                          class="col-xs-10 col-sm-5" />
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                  <div class="col-md-10 col-md-offset-2">
+                    <div class="form-group" id="phone">
+                      <label class="col-sm-2 control-label no-padding-right"
+                        for="form-field-1">Phone no</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="phoneno" value="{{d.phoneno}}" id="s" class="col-xs-10 col-sm-5" />
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                  <br><br><br>
+                  <div class="col-md-10 col-md-offset-2">
+                    <div class="form-group" id="qual">
+                      <label class="col-sm-2 control-label no-padding-right" for="form-field-1">Qualification</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="qualification" value="{{d.qualification}}" id="s"
+                          class="col-xs-10 col-sm-5" />
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                  <br><br><br>
+                  <button name="edit" type="submit" class="btn btn-success" id="bun"><span class="glyphicon 
+          glyphicon-ok-sign"></span>Submit</button>
+                </div>
+            </div>
+          </div>
+
+          </form>
+          <div class="modal-footer ">
+
+          </div>
+        </div>
+   
+    </div>
+  </div>
+</div>
+</div>
+
+{% endfor %}
+{% endblock %}

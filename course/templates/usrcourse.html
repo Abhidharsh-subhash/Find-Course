@@ -1,0 +1,83 @@
+{% extends "userhome.html" %}
+{% load static %}
+{% block content %}
+<style>
+    #search{
+        background-color: #98d0cb;;
+    }
+    #body{
+        background-color: azure;
+        margin-top: -40px;
+    }
+    #box{
+        margin-top: 55px;
+        margin-left: 102px;
+    }
+    #list{
+        margin-left: 10px;
+    }
+    .col{
+        margin-left: 575px;
+    font-size: 24px;
+    margin-top: 20px;
+    }
+    #table{
+        margin-top: -40px;
+    }
+</style>
+<div class="col"><b>Courses</b></div>
+<main class="content">
+<section id="main-content" style="min-height: 93vh">
+    <section class="wrapper" id="body">
+            <div class="row mt" id="box">
+                <div class="col-lg-10" id="table">
+                <div class="content-panel" style="padding: 10px 10px;">
+                    <section id="unseen">
+                    <form name="f1" method="post" action="">
+                        {% csrf_token %}
+                    <table class="table table-bordered table-striped table-condensed" style="width: 500px">
+                    <tr><td>SEARCH COURSE</td>
+                    <td>
+                    <input type="text" name="ser_user" value="{{d.name}}" placeholder="Search courses's name"> 
+                     </td>
+                     <td><input type="submit" name="sub" id="search" value="search"/></td>
+                   </tr>
+                   </table>
+                      </form>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                      <table class="table table-bordered table-striped table-condensed" style="width:190%;">
+                        <thead>
+                        <tr>
+                        <th>Sl:No</th>
+                        <th>Course</th>
+                        <th>College</th>
+                        <th>No.of Seats</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in datac %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{d.name}}</td>
+                            <td>{{d.college.name}}</td>
+                            <td>{{d.seats}}</td>
+                        </tr>
+                        {% endfor %}								
+                      </tbody>
+                    </table>
+                    </section>
+            </div><!-- /content-panel -->
+         </div><!-- /col-lg-4 -->	
+        <div style="height:480px;">
+          </div>				   
+        </div><!-- /row -->
+      </section>
+  </section>
+  </main>
+  {% endblock %}

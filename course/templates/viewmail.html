@@ -1,0 +1,66 @@
+{% extends "adminhome.html" %}
+{% load static %}
+{% block content %}
+<style>
+    #search{
+        background-color: #98d0cb;;
+    }
+    #searc{
+        width: 200px;
+    }
+</style>
+<section id="main-content" style="min-height: 93vh">
+    <section class="wrapper">
+        <h3>Feedback List</h3>
+            <div class="row mt">
+                <div class="col-lg-10">
+                <div class="content-panel" style="padding: 10px 10px;">
+                    
+                    <section id="unseen">
+                    <form name="f1" method="post" action="">
+                        {% csrf_token %}
+                    <table class="table table-bordered table-striped table-condensed" style="width: 500px">
+                    <tr><td>SEARCH USER</td>
+                    <td>
+                    <input type="text" id="searc" name="ser_user" value="{{d.mail}}" placeholder="Search user name"> 
+                     </td>
+                     <td><input type="submit" name="sub" id="search" value="search"/></td>
+                   </tr>
+                   </table>
+                      </form>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                      <table class="table table-bordered table-striped table-condensed" style="width:100%;"style="width:100%;">
+                        <thead>
+                        <tr>
+                        <th>Sl:No</th>
+                        <th>username</th>
+                        <th>Subject</th>
+                        <th>Feedback</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in datal %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{d.username}}</td>
+                            <td>{{d.subject}}</td>
+                            <td>{{d.mail}}</td>
+                        </tr>
+                        {% endfor %}								
+                      </tbody>
+                    </table>
+                    </section>
+            </div><!-- /content-panel -->
+         </div><!-- /col-lg-4 -->	
+        <div style="height:480px;">
+          </div>				   
+        </div><!-- /row -->
+      </section>
+  </section>
+  {% endblock %}

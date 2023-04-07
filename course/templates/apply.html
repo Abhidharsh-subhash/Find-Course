@@ -1,0 +1,124 @@
+{% extends "userhome.html" %}
+{% load static %}
+{% block content %}
+<style>
+    #head{
+        margin-left: 640px;
+        margin-top: 110px;
+    }
+    h2{
+        margin-left: 70px;
+    }
+    .log{
+        font-size: 18px;
+    margin-left: 2px;
+    margin-top: 5px;
+    }
+    #t1{
+        height: 50px;
+        width: 349px;
+        margin-top: 8px;
+    }
+    #college{
+      height: 50px;
+      width: 350px;
+    }
+    #tit{
+        margin-left: -160px;
+    margin-top: -74px;
+    }
+    #for{
+        margin-left: -200px;
+    }
+    #on{
+        margin-left: -563px;
+    margin-top: 25px;
+    }
+    .dat{
+        font-size: 18px;
+    margin-left: 2px;
+    margin-top: 5px;
+    }
+    #t2{
+        height: 32px;
+        width: 349px;
+        margin-top: 8px;
+    }
+    #course{
+        height: 50px;
+      width: 350px;
+    }
+</style>
+
+<table>
+<div class="col-lg-5" id="head"> 
+    <div class="section-title" id="tit">
+      <h2>Apply now</h2>
+      <p></p>
+    </div>
+
+    <form action="{% url 'app' %}" method="post" role="form">
+        {% csrf_token %}
+      <div class="form-row" id="for">
+        <div class="col-lg-12 col-md-12 form-group">
+            <div class="dat">Applicant name</div>
+            <input type="text" name="name" class="form-control" id="t1">
+            <div class="validate"></div>
+          </div>
+        <div class="col-lg-12 col-md-12 form-group">
+           <div class="log">College</div>
+           <select name="college" class="form-control" id="college" onchange="shi(this.value)">
+               <option value=" ">--college--</option>
+               {% for d in datad %}
+               <option value="{{d.collegeid}}">{{d.name}}</option>
+               {% endfor %}
+           </select>
+          </div>
+          <div class="col-lg-12 col-md-12 form-group">
+          <div class="log">Course</div>
+          <select name="course" class="form-control" id="course" onchange="">
+              <option value="">--course--</option>
+          </select>
+         </div>
+        <div class="col-lg-12 col-md-12 form-group">
+          <div class="dat">Current date</div>
+          <input type="date" name="date" class="form-control" id="t1">
+          <div class="validate"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 form-group">
+        <div class="dat">Bonus document</div>
+          <input type="file" name="document" class="form-control" id="t2">
+          <div class="validate"></div>
+        </div>
+        
+      </div>
+
+
+      <div class="text-center" id="on"><input type="submit" value="submit" class="btn btn-lg "  style="background:#cda45e;" /></div>
+    </form>
+  </div>
+  <div class="col-lg-2">
+</div></table>
+<script type="text/javascript">
+    function shi(x)
+     {
+
+       var xhttp = new XMLHttpRequest();
+       xhttp.onreadystatechange = function () {
+
+      if (this.readyState == 4 && this.status == 200) {
+
+      document.getElementById('course').innerHTML = this.responseText;
+}
+};
+
+
+xhttp.open("GET", "../getcor/?course="+x, true);
+
+xhttp.send();
+
+}
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends "adminhome.html" %}
+{% load static %}
+{% block content %}
+<style>
+  #search {
+    background-color: #98d0cb;
+    ;
+  }
+</style>
+<section id="main-content" style="min-height: 93vh">
+  <section class="wrapper">
+    <h3>Application's List</h3>
+    <div class="row mt">
+      <div class="col-lg-10">
+        <div class="content-panel" style="padding: 10px 10px;">
+
+          <section id="unseen">
+            <table class="table table-bordered table-striped table-condensed" style="width:100%;" style="width:100%;">
+              <thead>
+                <tr>
+                  <th>Sl:No</th>
+                  <th>Name</th>
+                  <th>College</th>
+                  <th>Course</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for d in datar %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{d.name}}</td>
+                  <td>{{d.college.name}}</td>
+                  <td>{{d.course.name}}</td>
+                  <td>{{d.date}}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-info btn-flat">Action</button>
+                      <button type="button" class="btn btn-info btn-flat dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a data-toggle="modal" data-target="#approve-{{d.registrationid}}" href="#"><i
+                              class="fa fa-check">&nbsp;&nbsp;approve</i></a></li>
+                        <li><a data-toggle="modal" data-target="#reject-{{d.registrationid}}" href="#"><i
+                              class="fa fa-ban">&nbsp;&nbsp;Reject</i></a></li>
+                      </ul>
+                    </div>
+                  </td>
+                  <div class="modal fade" id="approve-{{d.registrationid}}" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                              class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                          <h4 class="modal-title custom_align" id="Heading">Approval</h4>
+                        </div>
+                        <div class="modal-body">
+                          <br>
+                          <h3 class="modal-title custom_align" id="Heading" style="margin-left:200px;color:#e85c68">Are
+                            You Want Approve This new admission?</h3>
+                          <br>
+                          <form class="form-horizontal" method="post" name="myForm" onsubmit=""
+                            action="{% url 'approvereg' %}">
+                            {% csrf_token %}
+                            <input type="hidden" class="form-control" value="{{d.registrationid}}" name="aid">
+                            <div class="box-content">
+
+                              <button name="approve" type="submit" class="btn btn-success"><span class="glyphicon 
+  glyphicon-ok-sign"></span>Submit</button>
+                              <button type="reset" class="btn btn-default pull-right" data-dismiss="modal"><span
+                                  class="glyphicon glyphicon-remove"></span>No</button>
+
+                            </div>
+                        </div>
+
+                        </form>
+                        <div class="modal-footer ">
+
+                        </div>
+                      </div>
+                      <!-- /.modal-content -->
+                    </div>
+                  </div>
+                  <div class="modal fade" id="reject-{{d.registrationid}}" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                              class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                          <h4 class="modal-title custom_align" id="Heading">Rejection</h4>
+                        </div>
+                        <div class="modal-body">
+                          <br>
+                          <h3 class="modal-title custom_align" id="Heading" style="margin-left:200px;color:#e85c68">Are
+                            You Want to Reject This admission?</h3>
+                          <br>
+                          <form class="form-horizontal" method="post" name="myForm" onsubmit=""
+                            action="{% url 'rejectreg' %}">
+                            {% csrf_token %}
+                            <input type="hidden" class="form-control" value="{{d.registrationid}}" name="rid">
+                            <div class="box-content">
+
+                              <button name="reject" type="submit" class="btn btn-success"><span class="glyphicon 
+  glyphicon-ok-sign"></span>Submit</button>
+                              <button type="reset" class="btn btn-default pull-right" data-dismiss="modal"><span
+                                  class="glyphicon glyphicon-remove"></span>No</button>
+
+                            </div>
+                        </div>
+
+                        </form>
+                        <div class="modal-footer ">
+
+                        </div>
+                      </div>
+                      <!-- /.modal-content -->
+                    </div>
+                  </div>
+                </tr>
+                {% endfor%}
+              </tbody>
+            </table>
+          </section>
+        </div><!-- /content-panel -->
+      </div><!-- /col-lg-4 -->
+      <div style="height:480px;">
+      </div>
+    </div><!-- /row -->
+  </section>
+</section>
+{% endblock %}
